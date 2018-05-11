@@ -17,9 +17,9 @@ def gsc_algorithm(workers,managers,df1,df2,df3):
                 return np.nan
 
     """Create final matching dataframe """
-    df_matching_gsc = pd.DataFrame(index=workers, columns=[0, 1])
+    gsc_outcome = pd.DataFrame(index=workers, columns=[0, 1])
     for s in workers:
-        df_matching_gsc.loc[s][0] = s
+        gsc_outcome.loc[s][0] = s
 
     """ The gsc Algorithm """
 
@@ -48,7 +48,7 @@ def gsc_algorithm(workers,managers,df1,df2,df3):
                     story_line[0] = ''.join(['In step ',str(i+1),': ', p,' is matched to ', m,'. This is a ', str(df3.loc[i]['participant']), ':',str(df3.loc[i]['manager']) ])
                     story = story.append(story_line)
 
-                    df_matching_gsc.loc[p][1] = m
+                    gsc_outcome.loc[p][1] = m
                     matched_workers_gsc.extend([p])
                     matched_managers_gsc.extend([m])
 
@@ -57,6 +57,6 @@ def gsc_algorithm(workers,managers,df1,df2,df3):
     story = story.drop(['index'], 1)
     story = story.drop(0)
 
-    return df_matching_gsc, story
+    return gsc_outcome, story
 
 

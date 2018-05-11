@@ -5,9 +5,9 @@ def acoa(workers,managers,df1,df2,df1_raw,volunteers):
 
 
     """ create a data frame for the final matchings """
-    df_matching_acoa = pd.DataFrame(index=workers, columns=[0, 1])
+    acoa_outcome = pd.DataFrame(index=workers, columns=[0, 1])
     for s in workers:
-        df_matching_acoa.loc[s][0] = s
+        acoa_outcome.loc[s][0] = s
 
     """  create lists in which unmatched participants and managers will be put into during the algorithm """
     matched_workers = []
@@ -61,17 +61,17 @@ def acoa(workers,managers,df1,df2,df1_raw,volunteers):
     def C(m, p):
         unmatched_workers.remove(p)
         matched_workers.append(p)
-        df_matching_acoa.loc[p][1] = m
+        acoa_outcome.loc[p][1] = m
 
 
     def D(x):
         matched_workers.remove(x)
         unmatched_workers.append(x)
-        df_matching_acoa.loc[x][1] = 'No match (Lost his match)'
+        acoa_outcome.loc[x][1] = 'No match (Lost his match)'
 
 
     def current_match_of_accepter(m):
-        q = ''.join(df_matching_acoa.loc[df_matching_acoa[1] == m][0].values)
+        q = ''.join(acoa_outcome.loc[acoa_outcome[1] == m][0].values)
         return q
 
     def rank_from___of___(a, b):
@@ -108,7 +108,7 @@ def acoa(workers,managers,df1,df2,df1_raw,volunteers):
                         B(m)
                         C(m, p)
 
-                    elif m is not df_matching_acoa.loc[p][1]:
+                    elif m is not acoa_outcome.loc[p][1]:
                         q = current_match_of_accepter(m)
                         if rank_from___of___(m,p) > rank_from___of___(m,q):
                             A(p)
@@ -119,10 +119,10 @@ def acoa(workers,managers,df1,df2,df1_raw,volunteers):
         if all(pd.isnull(df1.loc[0][p]) for p in unmatched_workers):
             break
 
-    """ Replace all NaN in df_matching_acoa since they were never accepted"""
-    df_matching_acoa = df_matching_acoa.replace(np.nan, 'NaN.', regex=True)
+    """ Replace all NaN in acoa_outcome since they were never accepted"""
+    acoa_outcome = acoa_outcome.replace(np.nan, 'NaN.', regex=True)
 
     """ Add the DA matchings to the total matchings"""
 
-    return df_matching_acoa
+    return acoa_outcome
 
