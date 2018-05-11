@@ -129,4 +129,5 @@ def coa(workers,managers,df1,df2):
     story = story.reset_index()
     story = story.drop(['index'], 1)
     return coa_outcome
-    
+
+

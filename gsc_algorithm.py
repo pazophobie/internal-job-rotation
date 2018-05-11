@@ -34,7 +34,6 @@ def gsc_algorithm(workers,managers,df1,df2,df3):
     story_line = pd.DataFrame(index=[(0)], columns=[(0)])
 
 
-
     """Algorithm"""
 
     for i in range(0, 63):

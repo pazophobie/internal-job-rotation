@@ -24,7 +24,6 @@ def stability_test(workers,managers,df1,df2,df_matching_grid):
                 return np.nan
 
 
-
     def worker__s_match_rank(p):
         x = df_matching_grid.loc[df_matching_grid[0] == p][1].values[0]
         return rank_from___of___(p,x)
