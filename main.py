@@ -64,19 +64,29 @@ gsc_stable, gsc_blocking_paris = stability_test(workers,managers,df1,df2,gsc_mat
 
 """ What to print"""
 
-print('grid outcome:',gsc_matching)
-print(gsc_story)
-print('The Grid is ', gsc_stable)
-print(gsc_blocking_paris)
+
+
+"""GSC Algorithm Output"""
+
+#print('Outcome of the GSC Algortihm: \n',  gsc_matching)
+#print(gsc_story)
+#print('The GSC Algorithm outcome is ', gsc_stable)
+#print(gsc_blocking_paris)
+
+
+
+"""COA Output"""
+
+
+"""ACOA Output"""
+
 
 
 #print('The acoa is ', stability_test(workers,managers,df1,df2,da_adjusted))
+result = pd.concat([gsc_matching, coa, acoa], axis=1, join_axes=[coa.index])
+result = result.drop([0],1)
+result.columns = ['GSC','COA','ACOA']
 
-
-#result = pd.concat([da_normal_worker_proposing, da_adjusted,grid_matching], axis=1, join_axes=[da_normal_worker_proposing.index])
-#result = result.drop([0],1)
-#result.columns = ['DA','Adjusted','Grid']
-
-#print(result)
+print(result)
 
 
