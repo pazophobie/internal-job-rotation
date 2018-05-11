@@ -5,7 +5,7 @@ pd.set_option('display.width', desired_width)
 
 
 """ Import Excel File"""
-xl = pd.ExcelFile('excelsheets/pref_part_without_initial_match.xlsx')
+xl = pd.ExcelFile('participants_preferences.xlsx')
 
 
 """ define dataframes and make them workable... """
@@ -39,23 +39,23 @@ for w in workers:
 #print(df1)
 
 
-"""DA_NORMAL"""
-from DA_normal import DA_normal
-da_normal_worker_proposing = DA_normal(workers,managers,df1,df2)
-#da_normal_manager_proposing = DA_normal(managers,workers,df2,df1)
-#print(da_normal_worker_proposing)
+"""co"""
+from coa import coa
+coa_worker_proposing = coa(workers,managers,df1,df2)
+#coa_normal_manager_proposing = coa_normal(managers,workers,df2,df1)
+#print(coa_normal_worker_proposing)
 
 
 
-"""DA ADJUSTED"""
-from DA_adjusted import DA_adjusted
-da_adjusted = DA_adjusted(workers,managers,df1,df2,df1_raw,volunteers)
-#print(da_adjusted)
+"""ACOA"""
+from acoa import acoa
+acoa = acoa(workers,managers,df1,df2,df1_raw,volunteers)
+#print(acoa)
 
 
 """THE GRID"""
-from the_grid_algo import the_grid_algo
-grid_matching, grid_story = the_grid_algo(workers,managers,df1,df2,the_grid)
+from gsc_algorithm import gsc_algorithm
+grid_matching, grid_story = gsc_algorithm(workers,managers,df1,df2,the_grid)
 
 
 
@@ -76,7 +76,7 @@ print('The Grid is ', grid_stable)
 print(blocking_paris_grid)
 
 
-#print('The Adjusted DA is ', stability_test(workers,managers,df1,df2,da_adjusted))
+#print('The acoa is ', stability_test(workers,managers,df1,df2,da_adjusted))
 
 
 #result = pd.concat([da_normal_worker_proposing, da_adjusted,grid_matching], axis=1, join_axes=[da_normal_worker_proposing.index])
@@ -85,17 +85,4 @@ print(blocking_paris_grid)
 
 #print(result)
 
-
-
-
-
-''' LATEX OUTPUT'''
-
-'''grid pairing matrix'''
-
-""" Pairing Matrix"""
-from latex_output import df_pairs_matrix
-from latex_output import total_grid
-print(df_pairs_matrix(workers,managers,df1,df2))
-#total_grid(the_grid)
 
