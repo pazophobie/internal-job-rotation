@@ -65,36 +65,22 @@ gsc_stable, gsc_blocking_paris = stability_test(workers,managers,df1,df2,gsc_mat
 
 
 
+"""Combining Algorithms"""
 
-####################################
-########""" What to print"""########
-####################################
-
-
-"""GSC Algorithm Output"""
-
-#print('Outcome of the GSC Algortihm: \n',  gsc_matching)
-#print(gsc_story)
-#print('The GSC Algorithm outcome is ', gsc_stable)
-#print(gsc_blocking_paris)
-
-
-
-
-"""COA Output"""
-
-
-"""ACOA Output"""
-
-
-
-#print('The acoa is ', stability_test(workers,managers,df1,df2,da_adjusted))
 result = pd.concat([gsc_matching, coa, acoa], axis=1, join_axes=[coa.index])
-
 result = result.drop([0],1)
 result.columns = ['GSC','COA','ACOA']
 
-print('The results of the three different alorithms: \n ', result)
+####################################
+########""" Output """##############
+####################################
 
 
+
+
+print('\n The results of the three different alorithms: \n \n ', result)
+
+
+print('\n The GSC mechanism outcome is', gsc_stable, '\n \n','The blocking pairs are: \n', gsc_blocking_paris)
+print(gsc_story)
 

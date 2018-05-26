@@ -9,7 +9,9 @@ def stability_test(workers,managers,df1,df2,df_matching_grid):
     matched_managers= df_matching_grid[1].tolist()
 
     df_blockingpairs = pd.DataFrame(index=workers, columns=managers)  # define matrix for blocking pairs
-
+    for i in workers:
+        for j in managers:
+            df_blockingpairs.loc[i][j] = '.'
 
     def rank_from___of___(a, b):
         if a in workers:
@@ -59,10 +61,11 @@ def stability_test(workers,managers,df1,df2,df_matching_grid):
                         n =+1
                         df_blockingpairs.loc[p][m] = 'blocks'
 
+
     if n > 0:
 
         #return df_blockingpairs
-        return 'UNstable', df_blockingpairs
+        return 'unstable', df_blockingpairs
     else:
         return 'stable', df_blockingpairs
 
