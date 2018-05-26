@@ -1,11 +1,14 @@
 import pandas as pd
 import numpy as np
+from openpyxl import load_workbook
+
 desired_width = 500
 pd.set_option('display.width', desired_width)
 
 
 """ Import Excel File"""
-xl = pd.ExcelFile('participants_preferences.xlsx')
+main_excel_file = 'participants_preferences.xlsx'
+xl = pd.ExcelFile(main_excel_file)
 
 
 """ define dataframes """
@@ -14,13 +17,16 @@ df1_raw = xl.parse('Workers')  # workers
 df1 = df1_raw.drop([0,1])
 df1 = df1.reset_index()
 df1 = df1.drop(['index'], 1)
+df1 = df1.loc[:, ~df1.columns.str.contains('^Unnamed')]
 
 df2_raw = xl.parse('Managers')  # managers<
 df2 = df2_raw.drop([0])
 df2 = df2.reset_index()
 df2 = df2.drop(['index'], 1)
+df2 = df2.loc[:, ~df2.columns.str.contains('^Unnamed')]
 
-the_grid = xl.parse('Grid')  # the grid
+
+the_grid = xl.parse('The Grid')  # the grid
 
 
 """ Create lists of all workers and all managers"""
@@ -36,6 +42,8 @@ volunteers = []
 for w in workers:
     if df1_raw.loc[1][w] == 'yes':
         volunteers.append(w)
+
+
 
 
 
@@ -61,9 +69,9 @@ gsc_stable, gsc_blocking_paris = stability_test(workers,managers,df1,df2,gsc_mat
 
 
 
-
-""" What to print"""
-
+####################################
+########""" What to print"""########
+####################################
 
 
 """GSC Algorithm Output"""
@@ -89,5 +97,4 @@ result = result.drop([0],1)
 result.columns = ['GSC','COA','ACOA']
 
 print(result)
-
 

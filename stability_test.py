@@ -64,5 +64,5 @@ def stability_test(workers,managers,df1,df2,df_matching_grid):
         #return df_blockingpairs
         return 'UNstable', df_blockingpairs
     else:
-        return 'stable'
+        return 'stable', df_blockingpairs
 

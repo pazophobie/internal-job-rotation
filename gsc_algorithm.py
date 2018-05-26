@@ -42,9 +42,9 @@ def gsc_algorithm(workers,managers,df1,df2,df3):
 
         for p in workers:
             for m in managers:
-                if (rank_from___of___(p,m), rank_from___of___(m,p)) == (float(df3.loc[i]['participant']), float(df3.loc[i]['manager'])):
+                if (rank_from___of___(p,m), rank_from___of___(m,p)) == (float(df3.loc[i]['Participant']), float(df3.loc[i]['Manager'])):
 
-                    story_line[0] = ''.join(['In step ',str(i+1),': ', p,' is matched to ', m,'. This is a ', str(df3.loc[i]['participant']), ':',str(df3.loc[i]['manager']) ])
+                    story_line[0] = ''.join(['In step ',str(i+1),': ', p,' is matched to ', m,'. This is a ', str(df3.loc[i]['Participant']), ':',str(df3.loc[i]['Manager']) ])
                     story = story.append(story_line)
 
                     gsc_outcome.loc[p][1] = m
