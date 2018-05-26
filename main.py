@@ -45,9 +45,6 @@ for w in workers:
 
 
 
-
-
-
 """COA"""
 from coa import coa
 coa = coa(workers,managers,df1,df2)
@@ -93,8 +90,11 @@ gsc_stable, gsc_blocking_paris = stability_test(workers,managers,df1,df2,gsc_mat
 
 #print('The acoa is ', stability_test(workers,managers,df1,df2,da_adjusted))
 result = pd.concat([gsc_matching, coa, acoa], axis=1, join_axes=[coa.index])
+
 result = result.drop([0],1)
 result.columns = ['GSC','COA','ACOA']
 
-print(result)
+print('The results of the three different alorithms: \n ', result)
+
+
 
